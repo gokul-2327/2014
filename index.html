@@ -6,7 +6,6 @@
     <title>Welcome</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
@@ -21,8 +20,8 @@
             <button id="noBtn">No</button>
         </div>
 
-        <input type="text" id="nameInput" placeholder="Enter your name">
-        <input type="password" id="passcodeInput" placeholder="Enter passcode">
+        <input type="text" id="nameInput" placeholder="Enter your name" style="display:none;">
+        <input type="password" id="passcodeInput" placeholder="Enter passcode" style="display:none;">
     </div>
 
     <script>
@@ -32,11 +31,10 @@
         const passcodeInput = document.getElementById('passcodeInput');
         const mainMessage = document.getElementById('mainMessage');
         const buttonContainer = document.getElementById('buttonContainer');
-        const correctPasscode = "1"; // Set your secret here
+        const correctPasscode = "1"; // Your secret passcode
 
         let userName = "";
 
-        // Yes → Ask for name
         yesBtn.addEventListener('click', () => {
             buttonContainer.style.display = 'none';
             mainMessage.innerHTML = "<h2>Hi there! What's your name? 😊</h2>";
@@ -44,12 +42,10 @@
             nameInput.focus();
         });
 
-        // No → Exit
         noBtn.addEventListener('click', () => {
             document.body.innerHTML = "<h1>Okay! Come back when you're free 😊</h1>";
         });
 
-        // Name entered
         nameInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 userName = nameInput.value.trim();
@@ -63,12 +59,13 @@
                 }
             }
         });
+
         passcodeInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 if (passcodeInput.value === correctPasscode) {
                     localStorage.setItem('userName', userName);
                     sendEmailNotification(userName);
-                    window.location.href = 'site.html'; // Redirects immediately
+                    window.location.href = 'site.html';
                 } else {
                     alert("Wrong passcode 😢 Try again!");
                     passcodeInput.value = '';
@@ -84,15 +81,15 @@
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: "Birthday Website Access",
                     _subject: "🎉 Someone entered the passcode!",
+                    name: "Birthday Website Access",
                     message: `${userName} entered the correct passcode at ${new Date().toLocaleString()}`,
                     _replyto: "noreply@yourwebsite.com",
-                    _template: "table"
+                    _template: "table",
+                    _email: "yourrealemail@gmail.com" // ✅ Add your actual email here!
                 })
             }).catch(error => console.error("Email send failed:", error));
         }
-
     </script>
 
 </body>
