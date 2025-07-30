@@ -4,23 +4,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sample site</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Toggle Button Example</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .birthday-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #ee5e84;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+        
+        h2 {
+            font-family: 'Pacifico', cursive;
+            color: #ee5e84;
+            margin: 20px 0 10px;
+            font-size: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, #ff6b6b, #ffb347, #ee5e84);
+            margin: 20px 0;
+            border: none;
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+            }
+        }
+
+        .toggle-button {
+            background: white;
+            border: none;
+            border-radius: 10px 10px 0 0;
+            padding: 15px 25px;
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #ee5e84;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 0;
+            z-index: 1;
+        }
+
+        .toggle-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
+        }
+
+        .toggle-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content {
+            background: white;
+            border-radius: 0 0 10px 10px;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -10px;
+        }
+
+        .content.show {
+    max-height: 80vh; /* Increased from 60vh to 80vh */
+    overflow-y: auto;
+    padding: 20px;
+}
+@media (min-width: 768px) {
+    .content.show {
+        max-height: 70vh; /* Different height for larger screens */
+    }
+}
+
+        .content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: #ee5e84;
+            border-radius: 10px;
+        }
+
+        .heart {
+            color: #ee5e84;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Birthday header styles */
+.birthday-header {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.birthday-header h1 {
+    color: #ee5e84;
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.birthday-message {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* For version WITH box background */
+
+.birthday-header {
+    background: rgba(255,255,255,0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+    </style>
 </head>
 
 <body>
 
-    <div class="letter">
-        <div class="latter-date">1st Touch</div>
-        <div class="latter-content">
+<body>
+    <!-- Add this birthday greeting section -->
+    <div class="birthday-header">
+        <h1>🎂 Happy Birthday! 🎉</h1>
+        <p class="birthday-message">Wishing you a wonderful day filled with joy!</p>
+    </div>
+
+    <div class="container">
+        <button class="toggle-button" id="toggleBtn">Glimps Here!</button>
+        <div class="content" id="content">
+            <!-- Your content -->
             heyy!😊 once again many more happy returns of the day 20th birthday🎁,epdi ponichi unaku??? and gift lam
             receive paniya haha aprm may be you thinking like getting old haha because enakum apdithan irunthuchi so
-            atha sonen.aprm unikita oru mukiyamana visayam solanum romba lam onnum payapudra mari illa haha uk nee apo
-            apo enkita keppa theriyuma unoda crush yarunu? suma ethachum topic ey ilatha pothu random ah kepila apolam
-            enaku yarunu ilanu solluven ana unmaiyu solla pona you are the first crush ever in entire life ley ena shock
-            aguriya epdinu uk something serious ah soldren una china vayasula irunthey pudikum athunalathan enaku oruoru
-            vishayamum enaku niyapagam iruku antha chinna vayasula perumal kovil tree🌳 ku mela ukarthu athalam innum
-            enaku niyapagam iruku haha cute athulam nee epo pathalum phewww phewww nu use panuva intha word ah antha
+            atha sonen.aprm unikita oru mukiyamana visayam solanum romba lam onnum payapudra mari illa haha uk nee
+            apo apo enkita keppa theriyuma unoda crush yarunu? suma ethachum topic ey ilatha pothu random ah kepila
+            apolam enaku yarunu ilanu solluven ana unmaiyu solla pona you are the first crush ever in entire life ley ena
+            shock aguriya epdinu uk something serious ah soldren una china vayasula irunthey pudikum athunalathan enaku
+            oruoru vishayamum enaku niyapagam iruku antha chinna vayasula perumal kovil tree🌳 ku mela ukarthu athalam
+            innum enaku niyapagam iruku haha cute athulam nee epo pathalum phewww phewww nu use panuva intha word ah antha
             braceses vera poturupa cute apo haha enaku nalla niyapagam iruku marupadiyum soldren enaku crush na athu
             nethan ithu varaikum nee ninaipa deiiii enada clg la lam yarum ilayanuuu serious soldren clg la enaku
             pudikathu sola pona enoda taste ku yarum ila haha athan nee kandipa Thapa than eduthupa enaku theriyum but
@@ -42,6 +230,11 @@
             skills develop paniko will get a job from good company and good salary okay byeeeeeeeeeeee🇱👋🏻
         </div>
     </div>
-</body>
 
+    <script>
+        document.getElementById('toggleBtn').addEventListener('click', function() {
+            document.getElementById('content').classList.toggle('show');
+        });
+    </script>
+</body>
 </html>
