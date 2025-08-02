@@ -265,6 +265,29 @@
     const activityThreshold = 30000; // 30 seconds
     const formSubmitToken = "a14165930cf6fc28cc303b49ac9a0396";
     
+    // Track page visibility changes
+    let hiddenTime;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        // Page was minimized or tab switched
+        hiddenTime = Date.now();
+      } else if (hiddenTime) {
+        // Page was restored
+        const hiddenDuration = Date.now() - hiddenTime;
+        if (hiddenDuration > 5000) { // Only notify if hidden for more than 5 seconds
+          checkDirectAccess();
+        }
+      }
+    });
+    
+    // Check for direct access
+    function checkDirectAccess() {
+      if (!localStorage.getItem('authorizedAccess') && !sessionStorage.getItem('checkedDirectAccess')) {
+        sendActivityEmail('unauthorized');
+        sessionStorage.setItem('checkedDirectAccess', 'true');
+      }
+    }
+    
     // Initialize activity tracking
     function initActivityTracking() {
       sessionStartTime = parseInt(sessionStorage.getItem('sessionStartTime')) || Date.now();
@@ -279,6 +302,9 @@
           activityTimeout = setTimeout(sendActivityEmail, 60000); // Send every minute of activity
         });
       });
+      
+      // Check for direct access on initial load
+      setTimeout(checkDirectAccess, 1000);
     }
     
     function updateActivity() {
@@ -291,40 +317,51 @@
     }
     
     function sendActivityEmail(type = 'activity') {
-      if (!checkActivity()) {
+      if (!checkActivity() && type !== 'unauthorized') {
         console.log("User inactive - skipping email");
         return;
       }
       
+      const deviceInfo = getDeviceInfo();
       const userName = localStorage.getItem('userName') || 'Anonymous User';
-      const duration = Math.floor((Date.now() - sessionStartTime) / 60000); // minutes
+      const duration = Math.floor((Date.now() - sessionStartTime) / 60000);
       
       let subject, message;
       
       if (type === 'unauthorized') {
         subject = '🚨 Unauthorized Access to Birthday Page';
-        message = `Someone accessed the page directly at ${new Date().toLocaleString()}`;
+        message = `
+          Someone accessed the page directly at ${new Date().toLocaleString()}
+          Possible tab restore or direct URL access detected
+          Device: ${deviceInfo.model}
+          Browser: ${deviceInfo.browser}
+          Platform: ${deviceInfo.platform}
+          Screen: ${deviceInfo.screen}
+          IP: [will be automatically included by FormSubmit]
+        `;
       } else {
-        subject = `❤️ ${userName} is viewing your birthday page`;
-        message = `${userName} has been active for ${duration} minutes (since ${new Date(sessionStartTime).toLocaleTimeString()})`;
+        subject = `❤️ ${userName} is viewing your page`;
+        message = `
+          ${userName} has been active for ${duration} minutes
+          Since: ${new Date(sessionStartTime).toLocaleTimeString()}
+          Device: ${deviceInfo.model}
+          Browser: ${deviceInfo.browser}
+          Location: [FormSubmit will include approximate location]
+        `;
       }
-      
+
       fetch(`https://formsubmit.co/ajax/${formSubmitToken}`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: "Birthday Page Tracker",
           _subject: subject,
           message: message,
-          _template: "table"
+          _template: "box"
         })
       })
       .then(res => res.json())
-      .then(data => console.log("Email sent:", data))
-      .catch(err => console.error("Email error:", err));
+      .then(data => console.log("Email sent with device info"))
+      .catch(err => console.error("Error:", err));
     }
     
     // Check authorization on page load
@@ -350,7 +387,38 @@
       localStorage.removeItem('authorizedAccess');
       localStorage.removeItem('lastActivityTime');
     });
-  </script>
+    
+    // Get device information
+    function getDeviceInfo() {
+      const userAgent = navigator.userAgent;
+      let browser = "Unknown";
+      let model = "Unknown";
+      
+      // Detect browser
+      if (userAgent.includes("Firefox")) browser = "Firefox";
+      else if (userAgent.includes("SamsungBrowser")) browser = "Samsung Browser";
+      else if (userAgent.includes("Opera") || userAgent.includes("OPR")) browser = "Opera";
+      else if (userAgent.includes("Trident")) browser = "Internet Explorer";
+      else if (userAgent.includes("Edge")) browser = "Edge";
+      else if (userAgent.includes("Chrome")) browser = "Chrome";
+      else if (userAgent.includes("Safari")) browser = "Safari";
+      
+      // Detect device model
+      if (/iPhone|iPad|iPod/i.test(userAgent)) model = "Apple Device";
+      else if (/Android/i.test(userAgent)) model = "Android Device";
+      else if (/Windows/i.test(userAgent)) model = "Windows PC";
+      else if (/Macintosh/i.test(userAgent)) model = "Mac";
+      else if (/Linux/i.test(userAgent)) model = "Linux PC";
+      
+      return {
+        browser: browser,
+        model: model,
+        platform: navigator.platform,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        userAgent: userAgent
+      };
+    }
+</script>
     </body>
 
 </html>
