@@ -206,13 +206,11 @@
 </head>
 
 <body>
-
-    <body>
-        <!-- Add this birthday greeting section -->
-        <div class="birthday-header">
-            <h1>🎂 Happy Birthday! 🎉</h1>
-            <p class="birthday-message">Wishing you a wonderful day filled with joy!</p>
-        </div>
+    <!-- Add this birthday greeting section -->
+    <div class="birthday-header">
+        <h1>🎂 Happy Birthday! 🎉</h1>
+        <p class="birthday-message">Wishing you a wonderful day filled with joy!</p>
+    </div>
 
         <div class="container">
             <button class="toggle-button" id="toggleBtn">Glimps Here!</button>
@@ -261,27 +259,98 @@
         </div>
 
         <script>
-            document.getElementById('toggleBtn').addEventListener('click', function () {
-                document.getElementById('content').classList.toggle('show');
-            });
-
-            // Send an email notification when the page is loaded
-            window.addEventListener('DOMContentLoaded', () => {
-                const formData = new FormData();
-                formData.append('_subject', 'Someone accessed the Birthday Page!');
-                formData.append('message', 'someone accessed the birthday page' + new Date().toLocaleString());
-                formData.append('_captcha', 'false');
-                formData.append('_next', 'site.html'); // Optional: Redirect after submission
-
-                fetch('https://formsubmit.co/ajax/a14165930cf6fc28cc303b49ac9a0396', {
-                    method: 'POST',
-                    body: formData
-                })
-                    .then(response => response.json())
-                    .then(data => console.log('Email notification sent:', data))
-                    .catch(error => console.error('Error sending notification:', error));
-            });
-        </script>
+    // Activity tracking system
+    let sessionStartTime = Date.now();
+    let activityTimeout;
+    const activityThreshold = 30000; // 30 seconds
+    const formSubmitToken = "a14165930cf6fc28cc303b49ac9a0396";
+    
+    // Initialize activity tracking
+    function initActivityTracking() {
+      sessionStartTime = parseInt(sessionStorage.getItem('sessionStartTime')) || Date.now();
+      sessionStorage.setItem('sessionStartTime', sessionStartTime);
+      updateActivity();
+      
+      // Track user interactions
+      ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
+        window.addEventListener(event, () => {
+          updateActivity();
+          clearTimeout(activityTimeout);
+          activityTimeout = setTimeout(sendActivityEmail, 60000); // Send every minute of activity
+        });
+      });
+    }
+    
+    function updateActivity() {
+      localStorage.setItem('lastActivityTime', Date.now());
+    }
+    
+    function checkActivity() {
+      const lastActive = localStorage.getItem('lastActivityTime');
+      return !lastActive || (Date.now() - parseInt(lastActive)) < activityThreshold;
+    }
+    
+    function sendActivityEmail(type = 'activity') {
+      if (!checkActivity()) {
+        console.log("User inactive - skipping email");
+        return;
+      }
+      
+      const userName = localStorage.getItem('userName') || 'Anonymous User';
+      const duration = Math.floor((Date.now() - sessionStartTime) / 60000); // minutes
+      
+      let subject, message;
+      
+      if (type === 'unauthorized') {
+        subject = '🚨 Unauthorized Access to Birthday Page';
+        message = `Someone accessed the page directly at ${new Date().toLocaleString()}`;
+      } else {
+        subject = `❤️ ${userName} is viewing your birthday page`;
+        message = `${userName} has been active for ${duration} minutes (since ${new Date(sessionStartTime).toLocaleTimeString()})`;
+      }
+      
+      fetch(`https://formsubmit.co/ajax/${formSubmitToken}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: "Birthday Page Tracker",
+          _subject: subject,
+          message: message,
+          _template: "table"
+        })
+      })
+      .then(res => res.json())
+      .then(data => console.log("Email sent:", data))
+      .catch(err => console.error("Email error:", err));
+    }
+    
+    // Check authorization on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize toggle button
+      document.getElementById('toggleBtn').addEventListener('click', function() {
+        document.getElementById('content').classList.toggle('show');
+      });
+      
+      // Start activity tracking
+      initActivityTracking();
+      
+      // Check if user came through passcode page
+      if (!localStorage.getItem('authorizedAccess')) {
+        sendActivityEmail('unauthorized'); // Immediate notification
+      } else {
+        sendActivityEmail(); // Initial activity email
+      }
+    });
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', function() {
+      localStorage.removeItem('authorizedAccess');
+      localStorage.removeItem('lastActivityTime');
+    });
+  </script>
     </body>
 
 </html>
