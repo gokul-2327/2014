@@ -254,45 +254,32 @@
 
   <script>
     const correctPasscode = "1234";
-
+    
     function showForm() {
       document.getElementById("prompt").style.display = "none";
       document.getElementById("form-section").style.display = "flex";
       createConfetti();
     }
-
-    document.getElementById("secureForm").addEventListener("submit", function (e) {
+    
+    document.getElementById("secureForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
+      
       const passcode = document.getElementById("passcode").value;
       const name = document.getElementById("name").value;
-
+      
       if (passcode !== correctPasscode) {
         alert("Wrong passcode 😢 Try again!");
         document.getElementById("passcode").value = "";
         return;
       }
-
-      // Set the message to be sent to FormSubmit
-      document.getElementById("messageField").value = `Access granted for ${name}`;
-
-      // Create more confetti on successful submission
-      createConfetti(100);
-
-      // Submit the form data to FormSubmit
-      fetch(this.action, {
-        method: 'POST',
-        body: new FormData(this)
-      })
-        .then(() => {
-          // After successful submission, redirect to site.html
-          window.location.href = 'site.html';
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          // Even if FormSubmit fails, still redirect
-          window.location.href = 'site.html';
-        });
+      
+      // Store user info and mark as authorized
+      localStorage.setItem('userName', name);
+      localStorage.setItem('authorizedAccess', 'true');
+      sessionStorage.setItem('sessionStartTime', Date.now());
+      
+      // Redirect to birthday message page
+      window.location.href = "site.html";
     });
     // Confetti function
     function createConfetti(count = 50) {
