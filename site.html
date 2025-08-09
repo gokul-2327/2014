@@ -2,269 +2,454 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toggle Button Example</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Button Example</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
-            line-height: 1.6;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffeffb 0%, #f4bddc 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #ff0062;
+      line-height: 1.6;
+    }
 
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
 
-        .birthday-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
+    .birthday-card {
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
 
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: #ee5e84;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 2rem;
-        }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ee5e84;
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 2rem;
+    }
 
-        h2 {
-            font-family: 'Pacifico', cursive;
-            color: #ee5e84;
-            margin: 20px 0 10px;
-            font-size: 1.5rem;
-        }
+    h2 {
+      font-family: 'Pacifico', cursive;
+      color: #ee5e84;
+      margin: 20px 0 10px;
+      font-size: 1.5rem;
+    }
 
-        p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
+    p {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
 
-        .divider {
-            height: 2px;
-            background: linear-gradient(to right, #ff6b6b, #ffb347, #ee5e84);
-            margin: 20px 0;
-            border: none;
-        }
+    .divider {
+      height: 2px;
+      background: linear-gradient(to right, #ff6b6b, #ffb347, #ee5e84);
+      margin: 20px 0;
+      border: none;
+    }
 
-        @media (min-width: 768px) {
-            .container {
-                max-width: 600px;
-            }
-        }
+    @media (min-width: 768px) {
+      .container {
+        max-width: 600px;
+      }
+    }
 
-        .toggle-button {
-            background: white;
-            border: none;
-            border-radius: 10px 10px 0 0;
-            padding: 15px 25px;
-            font-family: 'Pacifico', cursive;
-            font-size: 1.5rem;
-            color: #ee5e84;
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            margin-bottom: 0;
-            z-index: 1;
-        }
+    .toggle-button {
+      background: white;
+      border: none;
+      border-radius: 10px 10px 0 0;
+      padding: 15px 25px;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5rem;
+      color: #ee5e84;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      margin-bottom: 0;
+      z-index: 1;
+    }
 
-        .toggle-button::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
-        }
+    .toggle-button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
+    }
 
-        .toggle-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
+    .toggle-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
 
-        .content {
-            background: white;
-            border-radius: 0 0 10px 10px;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: -10px;
-        }
+    .content {
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-top: -10px;
+    }
 
-        .content.show {
-            max-height: 80vh;
-            /* Increased from 60vh to 80vh */
-            overflow-y: auto;
-            padding: 20px;
-        }
+    .content.show {
+      max-height: 80vh;
+      /* Increased from 60vh to 80vh */
+      overflow-y: auto;
+      padding: 20px;
+    }
 
-        @media (min-width: 768px) {
-            .content.show {
-                max-height: 70vh;
-                /* Different height for larger screens */
-            }
-        }
+    @media (min-width: 768px) {
+      .content.show {
+        max-height: 70vh;
+        /* Different height for larger screens */
+      }
+    }
 
-        .content::-webkit-scrollbar {
-            width: 5px;
-        }
+    .content::-webkit-scrollbar {
+      width: 5px;
+    }
 
-        .content::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
+    .content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
 
-        .content::-webkit-scrollbar-thumb {
-            background: #ee5e84;
-            border-radius: 10px;
-        }
+    .content::-webkit-scrollbar-thumb {
+      background: #ee5e84;
+      border-radius: 10px;
+    }
 
-        .heart {
-            color: #ee5e84;
-            display: inline-block;
-            animation: heartbeat 1.5s infinite;
-        }
+    .heart {
+      color: #ee5e84;
+      display: inline-block;
+      animation: heartbeat 1.5s infinite;
+    }
 
-        @keyframes heartbeat {
-            0% {
-                transform: scale(1);
-            }
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
 
-            25% {
-                transform: scale(1.1);
-            }
+      25% {
+        transform: scale(1.1);
+      }
 
-            50% {
-                transform: scale(1);
-            }
+      50% {
+        transform: scale(1);
+      }
 
-            75% {
-                transform: scale(1.1);
-            }
+      75% {
+        transform: scale(1.1);
+      }
 
-            100% {
-                transform: scale(1);
-            }
-        }
+      100% {
+        transform: scale(1);
+      }
+    }
 
-        /* Birthday header styles */
-        .birthday-header {
-            text-align: center;
-            margin-bottom: 30px;
-            width: 100%;
-        }
+    /* Birthday header styles */
+    .birthday-header {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
 
-        .birthday-header h1 {
-            color: #ee5e84;
-            font-family: 'Pacifico', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+    .birthday-header h1 {
+      color: #ee5e84;
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .birthday-message {
-            font-size: 1.2rem;
-            color: #666;
-        }
+    .birthday-message {
+      font-size: 1.2rem;
+      color: #666;
+    }
 
-        /* For version WITH box background */
+    /* For version WITH box background */
 
-        .birthday-header {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-    </style>
+    .birthday-header {
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    /* Floating photos background */
+    .floating-photos {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .floating-photo {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+      animation: floatPhoto linear infinite;
+    }
+
+    .floating-photo:hover {
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1.1);
+    }
+
+    @keyframes floatPhoto {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+
+      25% {
+        transform: translate(5vw, 10vh) rotate(5deg);
+      }
+
+      50% {
+        transform: translate(10vw, 5vh) rotate(0deg);
+      }
+
+      75% {
+        transform: translate(5vw, -5vh) rotate(-5deg);
+      }
+
+      100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+    }
+
+    /* Add these new styles at the end of your existing style section */
+    
+    /* Feedback Form Styles */
+    .feedback-section {
+      margin-top: 40px;
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feedback-title {
+      font-family: 'Pacifico', cursive;
+      color: #ee5e84;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #666;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ee5e84;
+      box-shadow: 0 0 0 3px rgba(238, 94, 132, 0.2);
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .submit-btn {
+      background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-message {
+      text-align: center;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+  </style>
 </head>
 
 <body>
-    <!-- Add this birthday greeting section -->
-    <div class="birthday-header">
-        <h1>🎂 Happy Birthday! 🎉</h1>
-        <p class="birthday-message">Wishing you a wonderful day filled with joy!</p>
+  <!-- Add this birthday greeting section -->
+  <div class="birthday-header">
+    <h1>🎂 Happy Birthday! 🎉</h1>
+    <p class="birthday-message">Wishing you a wonderful day filled with joy!</p>
+  </div>
+
+  <div class="container">
+    <button class="toggle-button" id="toggleBtn">Glimps Here!</button>
+    <div class="content" id="content">
+      <!-- Your content -->
+      heyy!😊 once again many more happy returns of the day 20th birthday🎁,epdi ponichi unaku??? and gift lam
+      receive paniya haha aprm may be you thinking like getting old haha because enakum apdithan irunthuchi so
+      atha sonen.aprm unikita oru mukiyamana visayam solanum romba lam onnum payapudra mari illa haha uk nee
+      apo apo enkita keppa theriyuma unoda crush yarunu? suma ethachum topic ey ilatha pothu random ah kepila
+      apolam enaku yarunu ilanu solluven ana unmaiyu solla pona you are the first crush ever in entire life
+      ley ena
+      shock aguriya epdinu uk something serious ah soldren una china vayasula irunthey pudikum athunalathan
+      enaku
+      oruoru vishayamum enaku niyapagam iruku antha chinna vayasula perumal kovil tree🌳 ku mela ukarthu
+      athalam
+      innum enaku niyapagam iruku haha cute athulam nee epo pathalum phewww phewww nu use panuva intha word ah
+      antha
+      braceses vera poturupa cute apo haha enaku nalla niyapagam iruku marupadiyum soldren enaku crush na athu
+      nethan ithu varaikum nee ninaipa deiiii enada clg la lam yarum ilayanuuu serious soldren clg la enaku
+      pudikathu sola pona enoda taste ku yarum ila haha athan nee kandipa Thapa than eduthupa enaku theriyum
+      but
+      rombaaaaa nala solanum solanum thonum so inaiku soliten heyy paayapudhatha nan unaku propose lam panida
+      maten haha crush nu than sonen maruapadiyum soldreen you are my crushhhhhhhhhhhh! please Thapa
+      eduthukadha
+      okayyyy aprm ithu romba romba romba thappu than nan oathukiuren i don't know enaku antha thoughts
+      vanthichinu(ena ena when i was in relationship la itunthen la love panitu irunthapa soldren apo apo
+      unoda
+      thoughts varum like nee epdi iruka ennaa panitu iruka apdinalam just chuma thoughts than) okayyy ithalam
+      pathituuu ena ghost pannalum entha achiyapanaiyum ila i'm deserve it than seri okay than atho unoda
+      virupam
+      enaku suma storyku enoda like pota kuda sema happyyyy ah irukum haha aptm unoda id romba search pani
+      pathen
+      but unluckly kedaikala aprm than hari vnatha kmd ku aprm than avan mulamaaa vangunen hahahaa epdi
+      vangunen
+      unaku niyapagam unaku voice note anirupiruken munadiii i think you remember
+      aprmmmm vanthu verta onnum ila nalla study panuu unoda dream la seekarama achieve agum hopefully nee
+      ninaicha mariye America la poiyutu masters pannu and neraiya countries ku ponum nu sonala
+      anagalam ponga jolly ahh!!! and finally nan one solanum alwayssssss you are my favourite notification💬
+      yeahhhh but i think you munadiye light ah doubt irukumnu ninaikuren nan munadi unakite pesunatha vachi
+      enaku
+      un mela crush irukumnnuuu haha.... anyways nan sonathum ethuvum Thapa irunthichina im so sorryyyyyyyyyyy
+      manikavummmm please solamaiyevum iruka mudiyala athan hmmm oaky next year namnbalam final year vera so
+      nalla
+      skills develop paniko will get a job from good company and good salary okay byeeeeeeeeeeee🇱👋🏻
     </div>
-
-        <div class="container">
-            <button class="toggle-button" id="toggleBtn">Glimps Here!</button>
-            <div class="content" id="content">
-                <!-- Your content -->
-                heyy!😊 once again many more happy returns of the day 20th birthday🎁,epdi ponichi unaku??? and gift lam
-                receive paniya haha aprm may be you thinking like getting old haha because enakum apdithan irunthuchi so
-                atha sonen.aprm unikita oru mukiyamana visayam solanum romba lam onnum payapudra mari illa haha uk nee
-                apo apo enkita keppa theriyuma unoda crush yarunu? suma ethachum topic ey ilatha pothu random ah kepila
-                apolam enaku yarunu ilanu solluven ana unmaiyu solla pona you are the first crush ever in entire life
-                ley ena
-                shock aguriya epdinu uk something serious ah soldren una china vayasula irunthey pudikum athunalathan
-                enaku
-                oruoru vishayamum enaku niyapagam iruku antha chinna vayasula perumal kovil tree🌳 ku mela ukarthu
-                athalam
-                innum enaku niyapagam iruku haha cute athulam nee epo pathalum phewww phewww nu use panuva intha word ah
-                antha
-                braceses vera poturupa cute apo haha enaku nalla niyapagam iruku marupadiyum soldren enaku crush na athu
-                nethan ithu varaikum nee ninaipa deiiii enada clg la lam yarum ilayanuuu serious soldren clg la enaku
-                pudikathu sola pona enoda taste ku yarum ila haha athan nee kandipa Thapa than eduthupa enaku theriyum
-                but
-                rombaaaaa nala solanum solanum thonum so inaiku soliten heyy paayapudhatha nan unaku propose lam panida
-                maten haha crush nu than sonen maruapadiyum soldreen you are my crushhhhhhhhhhhh! please Thapa
-                eduthukadha
-                okayyyy aprm ithu romba romba romba thappu than nan oathukiuren i don't know enaku antha thoughts
-                vanthichinu(ena ena when i was in relationship la itunthen la love panitu irunthapa soldren apo apo
-                unoda
-                thoughts varum like nee epdi iruka ennaa panitu iruka apdinalam just chuma thoughts than) okayyy ithalam
-                pathituuu ena ghost pannalum entha achiyapanaiyum ila i'm deserve it than seri okay than atho unoda
-                virupam
-                enaku suma storyku enoda like pota kuda sema happyyyy ah irukum haha aptm unoda id romba search pani
-                pathen
-                but unluckly kedaikala aprm than hari vnatha kmd ku aprm than avan mulamaaa vangunen hahahaa epdi
-                vangunen
-                unaku niyapagam unaku voice note anirupiruken munadiii i think you remember
-                aprmmmm vanthu verta onnum ila nalla study panuu unoda dream la seekarama achieve agum hopefully nee
-                ninaicha mariye America la poiyutu masters pannu and neraiya countries ku ponum nu sonala
-                anagalam ponga jolly ahh!!! and finally nan one solanum alwayssssss you are my favourite notification💬
-                yeahhhh but i think you munadiye light ah doubt irukumnu ninaikuren nan munadi unakite pesunatha vachi
-                enaku
-                un mela crush irukumnnuuu haha.... anyways nan sonathum ethuvum Thapa irunthichina im so sorryyyyyyyyyyy
-                manikavummmm please solamaiyevum iruka mudiyala athan hmmm oaky next year namnbalam final year vera so
-                nalla
-                skills develop paniko will get a job from good company and good salary okay byeeeeeeeeeeee🇱👋🏻
-            </div>
+  </div>
+ <div class="container">
+    <!-- Add this feedback section at the end of your container div -->
+    <div class="feedback-section">
+      <h2 class="feedback-title">Send Me Your Thoughts!</h2>
+      <form id="feedbackForm" class="feedback-form" action="https://formsubmit.co/a14165930cf6fc28cc303b49ac9a0396" method="POST">
+        <!-- Hidden fields for FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="New Birthday Feedback!">
+        <input type="hidden" name="_template" value="box">
+        <input type="hidden" name="_next" value="?submit=success">
+        <input type="hidden" name="_captcha" value="false">
+        
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
         </div>
-
-        <script>
+        
+        <div class="form-group">
+          <label for="email">Your Email (optional)</label>
+          <input type="email" id="email" name="email">
+        </div>
+        
+        <div class="form-group">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="rating">How did you like this?</label>
+          <select id="rating" name="rating">
+            <option value="5">❤️❤️❤️❤️❤️ - Loved it!</option>
+            <option value="4">❤️❤️❤️❤️ - Really liked it</option>
+            <option value="3">❤️❤️❤️ - It was nice</option>
+            <option value="2">❤️❤️ - Could be better</option>
+            <option value="1">❤️ - Not my thing</option>
+          </select>
+        </div>
+        
+        <button type="submit" class="submit-btn">Send Feedback</button>
+        
+        <div id="formMessage" class="form-message"></div>
+      </form>
+    </div>
+  </div>
+  <script>
     // Activity tracking system
     let sessionStartTime = Date.now();
     let activityTimeout;
     const activityThreshold = 30000; // 30 seconds
     const formSubmitToken = "a14165930cf6fc28cc303b49ac9a0396";
-    
+
     // Track page visibility changes
     let hiddenTime;
     document.addEventListener('visibilitychange', () => {
@@ -279,7 +464,7 @@
         }
       }
     });
-    
+
     // Check for direct access
     function checkDirectAccess() {
       if (!localStorage.getItem('authorizedAccess') && !sessionStorage.getItem('checkedDirectAccess')) {
@@ -287,13 +472,13 @@
         sessionStorage.setItem('checkedDirectAccess', 'true');
       }
     }
-    
+
     // Initialize activity tracking
     function initActivityTracking() {
       sessionStartTime = parseInt(sessionStorage.getItem('sessionStartTime')) || Date.now();
       sessionStorage.setItem('sessionStartTime', sessionStartTime);
       updateActivity();
-      
+
       // Track user interactions
       ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
         window.addEventListener(event, () => {
@@ -302,32 +487,32 @@
           activityTimeout = setTimeout(sendActivityEmail, 60000); // Send every minute of activity
         });
       });
-      
+
       // Check for direct access on initial load
       setTimeout(checkDirectAccess, 1000);
     }
-    
+
     function updateActivity() {
       localStorage.setItem('lastActivityTime', Date.now());
     }
-    
+
     function checkActivity() {
       const lastActive = localStorage.getItem('lastActivityTime');
       return !lastActive || (Date.now() - parseInt(lastActive)) < activityThreshold;
     }
-    
+
     function sendActivityEmail(type = 'activity') {
       if (!checkActivity() && type !== 'unauthorized') {
         console.log("User inactive - skipping email");
         return;
       }
-      
+
       const deviceInfo = getDeviceInfo();
       const userName = localStorage.getItem('userName') || 'Anonymous User';
       const duration = Math.floor((Date.now() - sessionStartTime) / 60000);
-      
+
       let subject, message;
-      
+
       if (type === 'unauthorized') {
         subject = '🚨 Unauthorized Access to Birthday Page';
         message = `
@@ -359,21 +544,21 @@
           _template: "box"
         })
       })
-      .then(res => res.json())
-      .then(data => console.log("Email sent with device info"))
-      .catch(err => console.error("Error:", err));
+        .then(res => res.json())
+        .then(data => console.log("Email sent with device info"))
+        .catch(err => console.error("Error:", err));
     }
-    
+
     // Check authorization on page load
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       // Initialize toggle button
-      document.getElementById('toggleBtn').addEventListener('click', function() {
+      document.getElementById('toggleBtn').addEventListener('click', function () {
         document.getElementById('content').classList.toggle('show');
       });
-      
+
       // Start activity tracking
       initActivityTracking();
-      
+
       // Check if user came through passcode page
       if (!localStorage.getItem('authorizedAccess')) {
         sendActivityEmail('unauthorized'); // Immediate notification
@@ -381,19 +566,19 @@
         sendActivityEmail(); // Initial activity email
       }
     });
-    
+
     // Clean up on page unload
-    window.addEventListener('beforeunload', function() {
+    window.addEventListener('beforeunload', function () {
       localStorage.removeItem('authorizedAccess');
       localStorage.removeItem('lastActivityTime');
     });
-    
+
     // Get device information
     function getDeviceInfo() {
       const userAgent = navigator.userAgent;
       let browser = "Unknown";
       let model = "Unknown";
-      
+
       // Detect browser
       if (userAgent.includes("Firefox")) browser = "Firefox";
       else if (userAgent.includes("SamsungBrowser")) browser = "Samsung Browser";
@@ -402,14 +587,14 @@
       else if (userAgent.includes("Edge")) browser = "Edge";
       else if (userAgent.includes("Chrome")) browser = "Chrome";
       else if (userAgent.includes("Safari")) browser = "Safari";
-      
+
       // Detect device model
       if (/iPhone|iPad|iPod/i.test(userAgent)) model = "Apple Device";
       else if (/Android/i.test(userAgent)) model = "Android Device";
       else if (/Windows/i.test(userAgent)) model = "Windows PC";
       else if (/Macintosh/i.test(userAgent)) model = "Mac";
       else if (/Linux/i.test(userAgent)) model = "Linux PC";
-      
+
       return {
         browser: browser,
         model: model,
@@ -418,7 +603,148 @@
         userAgent: userAgent
       };
     }
-</script>
-    </body>
+    function preloadPhotos(urls) {
+      urls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    }
+    // Create floating photos
+    function createFloatingPhotos() {
+      const container = document.createElement('div');
+      container.className = 'floating-photos';
+      document.body.appendChild(container);
+
+      // Photo URLs - replace these with your actual photo URLs
+      const photoUrls = [
+        'pngwing.com.png',
+        'pngwing.com (0).png', 'pngwing.com (1).png', 'pngwing.com (2).png', 'pngwing.com (3).png', 'pngwing.com (4).png', 'pngwing.com (5).png', 'pngwing.com (6).png', 'pngwing.com (7).png', 'pngwing.com (8).png', 'pngwing.com (9).png', 'pngwing.com (10).png', 'pngwing.com (11).png', 'pngwing.com (12).png', 'pngwing.com (13).png', 'pngwing.com (14).png', 'pngwing.com (15).png', '5e020a57dc69f7c03ebe730e39eb5e93.png', '50942ddb0293b31fe9b9084e2d8a7e7f.png'];
+      preloadPhotos(photoUrls);
+
+      // If you don't have URLs, you can use numbered filenames if they follow a pattern
+      // for(let i = 1; i <= 30; i++) {
+      //     photoUrls.push(`photos/photo${i}.jpg`);
+      // }
+
+      photoUrls.forEach((url, index) => {
+        const img = document.createElement('img');
+        img.className = 'floating-photo';
+        img.src = url;
+        img.alt = `Memory ${index + 1}`;
+
+        // Random initial position
+        const startX = Math.random() * 80;
+        const startY = Math.random() * 80;
+
+        // Random animation duration (10-30s)
+        const duration = 10 + Math.random() * 20;
+
+        // Random delay (0-10s)
+        const delay = Math.random() * 10;
+
+        // Random size variation
+        const size = 80 + Math.random() * 80;
+
+        // Apply styles
+        img.style.left = `${startX}vw`;
+        img.style.top = `${startY}vh`;
+        img.style.width = `${size}px`;
+        img.style.height = `${size}px`;
+        img.style.animationDuration = `${duration}s`;
+        img.style.animationDelay = `-${delay}s`;
+
+        // Different animation for every 3rd photo
+        if (index % 3 === 0) {
+          img.style.animationName = 'floatPhotoAlt';
+        }
+
+        container.appendChild(img);
+      });
+    }
+
+    // Alternative animation
+    const style = document.createElement('style');
+    style.textContent = `
+@keyframes floatPhotoAlt {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(-5vw, 8vh) rotate(-3deg);
+    }
+    50% {
+        transform: translate(-8vw, -3vh) rotate(0deg);
+    }
+    75% {
+        transform: translate(3vw, -8vh) rotate(3deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+`;
+    document.head.appendChild(style);
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', createFloatingPhotos);
+
+
+    // Add this script at the end of your existing script section
+    
+    // Handle form submission feedback
+    document.addEventListener('DOMContentLoaded', function() {
+      const feedbackForm = document.getElementById('feedbackForm');
+      const formMessage = document.getElementById('formMessage');
+      
+      // Check for success parameter in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('submit') === 'success') {
+        showFormMessage('Thank you for your feedback! ❤️', 'success');
+      }
+      
+      feedbackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        const submitBtn = feedbackForm.querySelector('.submit-btn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        // Submit form data
+        fetch(feedbackForm.action, {
+          method: 'POST',
+          body: new FormData(feedbackForm)
+        })
+        .then(response => {
+          if (response.ok) {
+            showFormMessage('Thank you for your feedback! ❤️', 'success');
+            feedbackForm.reset();
+          } else {
+            throw new Error('Network response was not ok');
+          }
+        })
+        .catch(error => {
+          showFormMessage('Oops! Something went wrong. Please try again.', 'error');
+          console.error('Error:', error);
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Feedback';
+        });
+      });
+      
+      function showFormMessage(message, type) {
+        formMessage.textContent = message;
+        formMessage.className = `form-message ${type}`;
+        formMessage.style.display = 'block';
+        
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          formMessage.style.display = 'none';
+        }, 5000);
+      }
+    });
+  </script>
+</body>
 
 </html>
