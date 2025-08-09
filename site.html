@@ -250,101 +250,92 @@
     }
 
     /* Add these new styles at the end of your existing style section */
-    
-    /* Feedback Form Styles */
-    .feedback-section {
-      margin-top: 40px;
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .feedback-title {
-      font-family: 'Pacifico', cursive;
-      color: #ee5e84;
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.8rem;
-    }
-    
-    .feedback-form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .form-group label {
-      margin-bottom: 5px;
-      font-weight: 600;
-      color: #666;
-    }
-    
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: #ee5e84;
-      box-shadow: 0 0 0 3px rgba(238, 94, 132, 0.2);
-    }
-    
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    
-    .submit-btn {
-      background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
-      color: white;
-      border: none;
-      padding: 15px;
-      border-radius: 8px;
-      font-family: 'Pacifico', cursive;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
-    }
-    
-    .submit-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    .form-message {
-      text-align: center;
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 8px;
-      display: none;
-    }
-    
-    .success {
-      background-color: #d4edda;
-      color: #155724;
-    }
-    
-    .error {
-      background-color: #f8d7da;
-      color: #721c24;
-    }
+    /* Update feedback form styles */
+.feedback-section {
+  margin-top: 40px;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
 
+.feedback-title {
+  font-family: 'Pacifico', cursive;
+  color: #ee5e84;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #666;
+}
+
+.form-group textarea {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: #ee5e84;
+  box-shadow: 0 0 0 3px rgba(238, 94, 132, 0.2);
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #ff6b6b, #ffb347, #ee5e84);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-message {
+  text-align: center;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
   </style>
 </head>
 
@@ -397,51 +388,31 @@
       un mela crush irukumnnuuu haha.... anyways nan sonathum ethuvum Thapa irunthichina im so sorryyyyyyyyyyy
       manikavummmm please solamaiyevum iruka mudiyala athan hmmm oaky next year namnbalam final year vera so
       nalla
-      skills develop paniko will get a job from good company and good salary okay byeeeeeeeeeeee👋🏻
+      skills develop paniko will get a job from good company and good salary okay byeeeeeeeeeeee🇱👋🏻
     </div>
   </div>
  <div class="container">
     <!-- Add this feedback section at the end of your container div -->
-    <div class="feedback-section">
-      <h2 class="feedback-title">Send Me Your Thoughts!</h2>
-      <form id="feedbackForm" class="feedback-form" action="https://formsubmit.co/a14165930cf6fc28cc303b49ac9a0396" method="POST">
-        <!-- Hidden fields for FormSubmit configuration -->
-        <input type="hidden" name="_subject" value="New Birthday Feedback!">
-        <input type="hidden" name="_template" value="box">
-        <input type="hidden" name="_next" value="?submit=success">
-        <input type="hidden" name="_captcha" value="false">
-        
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="email">Your Email (optional)</label>
-          <input type="email" id="email" name="email">
-        </div>
-        
-        <div class="form-group">
-          <label for="message">Your Message</label>
-          <textarea id="message" name="message" required></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="rating">How did you like this?</label>
-          <select id="rating" name="rating">
-            <option value="5">❤️❤️❤️❤️❤️ - Loved it!</option>
-            <option value="4">❤️❤️❤️❤️ - Really liked it</option>
-            <option value="3">❤️❤️❤️ - It was nice</option>
-            <option value="2">❤️❤️ - Could be better</option>
-            <option value="1">❤️ - Not my thing</option>
-          </select>
-        </div>
-        
-        <button type="submit" class="submit-btn">Send Feedback</button>
-        
-        <div id="formMessage" class="form-message"></div>
-      </form>
+    <!-- Replace the existing feedback form with this simplified version -->
+<div class="feedback-section">
+  <h2 class="feedback-title">Send Me Your Thoughts!</h2>
+  <form id="feedbackForm" class="feedback-form" action="https://formsubmit.co/a14165930cf6fc28cc303b49ac9a0396" method="POST">
+    <!-- Hidden fields for FormSubmit configuration -->
+    <input type="hidden" name="_subject" value="New Birthday Feedback!">
+    <input type="hidden" name="_template" value="box">
+    <input type="hidden" name="_next" value="?submit=success">
+    <input type="hidden" name="_captcha" value="false">
+    
+    <div class="form-group">
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" required></textarea>
     </div>
+    
+    <button type="submit" class="submit-btn">Let It Fly 🕊️</button>
+    
+    <div id="formMessage" class="form-message"></div>
+  </form>
+</div>
   </div>
   <script>
     // Activity tracking system
@@ -729,7 +700,7 @@
         })
         .finally(() => {
           submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Feedback';
+          submitBtn.textContent = 'Let It Fly 🕊️';
         });
       });
       
