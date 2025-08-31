@@ -278,9 +278,11 @@
       localStorage.setItem('authorizedAccess', 'true');
       sessionStorage.setItem('sessionStartTime', Date.now());
       
-      // Redirect to birthday message page
-      window.location.href = "site.html";
+      // Open the birthday page in a new window without browser chrome
+      const features = 'width=' + screen.width + ',height=' + screen.height + ',fullscreen=yes';
+      window.open('site.html', '_blank', features);
     });
+    
     // Confetti function
     function createConfetti(count = 50) {
       const container = document.getElementById('confetti-container');
